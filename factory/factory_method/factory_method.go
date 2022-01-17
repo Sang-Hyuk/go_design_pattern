@@ -50,9 +50,48 @@ type NYStyleCheesePizza struct {
 func NewNYStyleCheesePizza() *NYStyleCheesePizza {
 	return &NYStyleCheesePizza{BasePizza: BasePizza{
 		Name:     "뉴욕치즈피자",
-		Dough:    "씬 크러스트 도우",
+		Dough:    "씬 크러스트",
 		Sauce:    "마리나라 소스",
-		Toppings:[]string{"잘게 썬 레지아노 치즈"},
+		Toppings:[]string{"잘게 썬 레지아노 치즈", "마늘"},
+	}}
+}
+
+type NYStylePeperoniPizza struct {
+	BasePizza
+}
+
+func NewNYStylePeperoniPizza() *NYStylePeperoniPizza {
+	return &NYStylePeperoniPizza{BasePizza: BasePizza{
+		Name:     "뉴욕페퍼로니",
+		Dough:    "중간 두께의 일반",
+		Sauce:    "마리라나 소스",
+		Toppings:[]string{"페퍼로니", "레지아노 치즈", "버섯", "양파", "고추"},
+	}}
+}
+
+type NYStyleClamPizza struct {
+	BasePizza
+}
+
+func NewNYStyleClamPizza() *NYStyleClamPizza {
+	return &NYStyleClamPizza{BasePizza: BasePizza{
+		Name:     "뉴욕조개피자",
+		Dough:    "씬",
+		Sauce:    "마리나라 소스",
+		Toppings:[]string{"조개", "올리브"},
+	}}
+}
+
+type NYStyleVeggiePizza struct {
+	BasePizza
+}
+
+func NewNYStyleVeggiePizza() *NYStyleVeggiePizza {
+	return &NYStyleVeggiePizza{BasePizza: BasePizza{
+		Name:     "뉴욕야채피자",
+		Dough:    "씬 크러스트",
+		Sauce:    "토마토 소스",
+		Toppings:[]string{"비건 치즈", "바질"},
 	}}
 }
 
@@ -63,7 +102,7 @@ type ChicagoStyleCheesePizza struct {
 func NewChicagoStyleCheesePizza() *ChicagoStyleCheesePizza {
 	return &ChicagoStyleCheesePizza{BasePizza: BasePizza{
 		Name:     "시카고 스카일 딥디쉬 치즈 피자",
-		Dough:    "아주 두꺼운 크러스트 도우",
+		Dough:    "아주 두꺼운 크러스트",
 		Sauce:    "플럼 토마토 소스",
 		Toppings:[]string{"아주 많은 모짜렐라 치즈"},
 	}}
@@ -94,6 +133,12 @@ func (N NYPizzaStore) CreatePizza(pizzaType string) Pizza {
 	switch pizzaType {
 	case "cheese":
 		return NewNYStyleCheesePizza()
+	case "peperoni":
+		return NewNYStylePeperoniPizza()
+	case "clam":
+		return NewNYStyleClamPizza()
+	case "veggie":
+		return NewNYStyleVeggiePizza()
 	}
 
 	return nil
@@ -117,6 +162,12 @@ func main() {
 
 	pizza := n.OrderPizza("cheese")
 	fmt.Printf("상일이가 주문한 피자 %s\n", pizza.GetName())
+	pizza = n.OrderPizza("peperoni")
+	fmt.Printf("세찬이가 주문한 피자 %s\n", pizza.GetName())
+	pizza = n.OrderPizza("clam")
+	fmt.Printf("혁수가 주문한 피자 %s\n", pizza.GetName())
+	pizza = n.OrderPizza("veggie")
+	fmt.Printf("재석이가 주문한 피자 %s\n", pizza.GetName())
 
 	pizza = c.OrderPizza("cheese")
 	fmt.Printf("상혁이가 주문한 피자 %s\n", pizza.GetName())
